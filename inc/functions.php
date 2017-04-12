@@ -2557,7 +2557,6 @@ function buildThread($id, $return = false, $mod = false) {
 	if ($config['try_smarter'] && !$mod)
 		$build_pages[] = thread_find_page($id);
 
-	if ( $return || $mod) {
 		$query = prepare(sprintf("SELECT * FROM ``posts_%s`` WHERE (`thread` IS NULL AND `id` = :id) OR `thread` = :id ORDER BY `thread`,`id`", $board['uri']));
 		$query->bindValue(':id', $id, PDO::PARAM_INT);
 		$query->execute() or error(db_error($query));
@@ -2571,38 +2570,34 @@ function buildThread($id, $return = false, $mod = false) {
 		}
 
 		// Check if any posts were found
-		if (!isset($thread))
-			error($config['error']['nonexistant']);
-	
-		$hasnoko50 = $thread->postCount() >= $config['noko50_min'];
-		$antibot = $mod || $return ? false : create_antibot($board['uri'], $id);
+	if (!isset($thread))
+		error($config['error']['nonexistant']);
 
-		$body = Element('thread.html', array(
-			'board' => $board,
-			'thread' => $thread,
-			'body' => $thread->build(),
-			'config' => $config,
-			'id' => $id,
-			'mod' => $mod,
-			'hasnoko50' => $hasnoko50,
-			'isnoko50' => false,
-			'antibot' => $antibot,
-			'boardlist' => createBoardlist($mod),
-			'return' => ($mod ? '?' . $board['url'] . $config['file_index'] : $config['root'] . $board['dir'] . $config['file_index'])
-		));
+	$hasnoko50 = $thread->postCount() >= $config['noko50_min'];
+	$antibot = $mod || $return ? false : create_antibot($board['uri'], $id);
+	$body = Element('thread.html', array(
+		'board' => $board,
+		'thread' => $thread,
+		'body' => $thread->build(),
+		'config' => $config,
+		'id' => $id,
+		'mod' => $mod,
+		'hasnoko50' => $hasnoko50,
+		'isnoko50' => false,
+		'antibot' => $antibot,
+		'boardlist' => createBoardlist($mod),
+		'return' => ($mod ? '?' . $board['url'] . $config['file_index'] : $config['root'] . $board['dir'] . $config['file_index'])
+	));
 
-		// json api
-		if ($config['api']['enabled']) {
-			$api = new Api();
-			$json = json_encode($api->translateThread($thread));
-			$jsonFilename = $board['dir'] . $config['dir']['res'] . $id . '.json';
-			file_write($jsonFilename, $json);
-		}
-	}
-	else {
+	// json api
+	if ($config['api']['enabled']) {
+		$api = new Api();
+		$json = json_encode($api->translateThread($thread));
 		$jsonFilename = $board['dir'] . $config['dir']['res'] . $id . '.json';
-		file_unlink($jsonFilename);
+		file_write($jsonFilename, $json);
 	}
+}
+
 
 	if ($return) {
 		return $body;
