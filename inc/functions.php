@@ -1595,9 +1595,9 @@ function index($page, $mod=false) {
 // Handle statistic tracking for a new post.
 function updateStatisticsForPost( $post, $new = true ) {
 	$identity = getIdentity();
-	$postIp   = isset($post['ip']) ? $post['ip'] : $identity;
+	$postIp   = $identity;
 	$postUri  = $post['board'];
-	$postTime = (int)( $post['time'] / 3600 ) * 3600;
+	$postTime = (int)( $post['time'] );
 	
 	$bsQuery = prepare("SELECT * FROM ``board_stats`` WHERE `stat_uri` = :uri AND `stat_hour` = :hour");
 	$bsQuery->bindValue(':uri', $postUri);
@@ -1649,7 +1649,7 @@ function updateStatisticsForPost( $post, $new = true ) {
 		query("UPDATE ``boards`` SET `posts_total`=`posts_total`+1 WHERE `uri`=\"{$postUri}\"");
 	}
 	
-	return $boardStats;
+	return 0; 
 }
 
 function getPageButtons($pages, $mod=false) {
