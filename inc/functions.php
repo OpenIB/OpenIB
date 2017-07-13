@@ -1973,7 +1973,7 @@ function checkDNSBL($use_ip = false) {
 	if (!$use_ip && !isset($_SERVER['REMOTE_ADDR']))
 		return; // Fix your web server configuration
 
-	$ip = ($use_ip ? $use_ip : $_SERVER['REMOTE_ADDR']);
+	$ip = ($use_ip ? $use_ip : getIdentity());
 	if ($ip == $config['tor_ip_hash']) return true;
 
 	if (isIPv6($ip))
