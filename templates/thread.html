@@ -37,7 +37,6 @@
 				{% endif %}
 			{% endif %}
 			{% if mod %}<p><a href="?/">{% trans %}Return to dashboard{% endtrans %}</a></p>{% endif %}
-			<p><a href="{{ config.root }}{{ board.dir }}{{ config.catalog_link }}">Catalog</a></p>
 		</div>
 	</header>
 
@@ -48,7 +47,7 @@
 	{% endif %}
 
 	<div class="banner">{% trans %}Posting mode: Reply{% endtrans %} <a class="unimportant" href="{{ return }}">[{% trans %}Return{% endtrans %}]</a> <a class="unimportant" href="javascript:window.scrollTo(0,document.body.scrollHeight);
-">[{% trans %}Go to bottom {% endtrans %}]</a></div>
+">[{% trans %}Go to bottom {% endtrans %}]</a> <a class="unimportant" href="{% if mod %}?{% endif %}{{ config.root }}{{ board.dir }}{{ config.catalog_link }}">[Catalog]</a></div>
 
 	{% include 'ad_top.html' %}
 
