@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Alex Assada <assada@mail.ua>, 2014
 # Zhargal Sambuev <hello@sambuev.com>, 2014
@@ -10,14 +10,17 @@ msgstr ""
 "Project-Id-Version: infinity\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-18 13:47+0200\n"
-"PO-Revision-Date: 2015-04-01 23:22+0000\n"
+"PO-Revision-Date: 2017-11-25 22:52+0500\n"
 "Last-Translator: copypaste <admin@8chan.co>\n"
-"Language-Team: Russian (Russia) (http://www.transifex.com/projects/p/infinity/language/ru_RU/)\n"
+"Language-Team: Russian (Russia) (http://www.transifex.com/projects/p/"
+"infinity/language/ru_RU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru_RU\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../../../../js/style-select.js:40 ../../../../js/style-select.js:41
 #: ../../../../js//style-select.js:41
@@ -99,7 +102,7 @@ msgstr "Встроить"
 #: ../../../../js/upload-selection.js:77
 #: ../../../../js//upload-selection.js:77
 msgid "Oekaki"
-msgstr "Oekaki"
+msgstr "Оэкаки"
 
 #: ../../../../js/toggle-images.js:41 ../../../../js/toggle-images.js:42
 #: ../../../../js/toggle-images.js:45 ../../../../js//toggle-images.js:45
@@ -235,7 +238,7 @@ msgstr "Введите шрифт или оставить пустым"
 #: ../../../../js/forced-anon.js:74 ../../../../js/forced-anon.js:80
 #: ../../../../js/forced-anon.js:97 ../../../../js/forced-anon.js:101
 msgid "Forced anonymity"
-msgstr "Все анонимно"
+msgstr "Все анонимны"
 
 #: ../../../../js/forced-anon.js:59 ../../../../js/forced-anon.js:65
 #: ../../../../js/forced-anon.js:60 ../../../../js/forced-anon.js:66
@@ -339,7 +342,7 @@ msgstr "Ответ в <small>&gt;&gt;{0}</small>"
 #: ../../../../js/quick-reply.js:33 ../../../../js/quick-reply-old.js:33
 #: ../../../../js/quick-reply-old.js:35
 msgid "Return"
-msgstr "Вернуться"
+msgstr "Назад"
 
 #: ../../../../js/expand-all-images.js:20
 #: ../../../../js/expand-all-images.js:21
@@ -452,7 +455,7 @@ msgstr "Загрузить URL"
 #: ../../../../js/quick-reply.js:266 ../../../../js/quick-reply.js:267
 #: ../../../../js/quick-reply.js:268
 msgid "Spoiler Image"
-msgstr "Картинка-спойлер"
+msgstr "Скрыть изображение"
 
 #: ../../../../js/quick-reply.js:277 ../../../../js/quick-reply.js:278
 #: ../../../../js/quick-reply.js:279 ../../../../js/quick-reply.js:281
@@ -532,7 +535,8 @@ msgstr "Следить за доской"
 
 #: ../../../../js/wpaint.js:113 ../../../../js//wpaint.js:113
 msgid "Click on any image on this site to load it into oekaki applet"
-msgstr "Нажмите на любое изображение на этом сайте, чтобы загрузить его в oekaki"
+msgstr ""
+"Нажмите на любое изображение на этом сайте, чтобы загрузить его в oekaki"
 
 #: ../../../../js/local-time.js:29 ../../../../templates/main.js:62
 #: ../../../../templates//main.js:68 ../../../../templates/main.js:68
@@ -714,17 +718,17 @@ msgstr "Твой браузер не умеет в HTML5 видео."
 #: ../../../../js/expand-video.js:189 ../../../../js/expand-video.js:192
 #: ../../../../js/expand-video.js:193 ../../../../js//expand-video.js:193
 msgid "[play once]"
-msgstr "[Играть]"
+msgstr "[один раз]"
 
 #: ../../../../js/expand-video.js:190 ../../../../js/expand-video.js:193
 #: ../../../../js/expand-video.js:194 ../../../../js//expand-video.js:194
 msgid "[loop]"
-msgstr "[Лупп]"
+msgstr "[по кругу]"
 
 #: ../../../../js/webm-settings.js:42 ../../../../js/webm-settings.js:45
 #: ../../../../js//webm-settings.js:46 ../../../../js/webm-settings.js:46
 msgid "WebM Settings"
-msgstr "WebM настройки"
+msgstr "Настройки WebM "
 
 #: ../../../../js/webm-settings.js:44 ../../../../js/webm-settings.js:54
 #: ../../../../js//webm-settings.js:55 ../../../../js/webm-settings.js:55
@@ -739,12 +743,12 @@ msgstr "Проиграть при наведении"
 #: ../../../../js/webm-settings.js:46 ../../../../js/webm-settings.js:56
 #: ../../../../js//webm-settings.js:58 ../../../../js/webm-settings.js:58
 msgid "Default volume"
-msgstr "Громкость"
+msgstr "Громкость по умолчанию"
 
 #: ../../../../js/treeview.js:18 ../../../../js//treeview.js:68
 #: ../../../../js/treeview.js:68
 msgid "Tree view"
-msgstr "Просмотр дерева"
+msgstr "Древовидные ответы"
 
 #: ../../../../js/expand-all-images.js:32
 #: ../../../../js/expand-all-images.js:35
@@ -772,50 +776,50 @@ msgstr "Не анимированная gif-ка"
 #: ../../../../js/webm-settings.js:41 ../../../../js//webm-settings.js:42
 #: ../../../../js/webm-settings.js:42
 msgid "WebM"
-msgstr ""
+msgstr "WebM"
 
 #: ../../../../js/live-index.js:25 ../../../../js/live-index.js:84
 #: ../../../../js//live-index.js:25 ../../../../js//live-index.js:84
 msgid "No new posts."
-msgstr ""
+msgstr "Нет новых постов."
 
 #: ../../../../js/live-index.js:30 ../../../../js/live-index.js:73
 #: ../../../../js//live-index.js:30 ../../../../js//live-index.js:73
 msgid "No new threads."
-msgstr ""
+msgstr "Нет новых тредов."
 
 #: ../../../../js/live-index.js:72 ../../../../js//live-index.js:72
 #, python-brace-format
 msgid "There are {0} new threads."
-msgstr ""
+msgstr "{0} новых тредов."
 
 #: ../../../../js/live-index.js:83 ../../../../js//live-index.js:83
 #, python-brace-format
 msgid "There are {0} new posts in this thread."
-msgstr ""
+msgstr "{0} новых постов."
 
 #: ../../../../js/options.js:106 ../../../../js//options.js:106
 msgid "Options"
-msgstr ""
+msgstr "Опции"
 
 #: ../../../../js/options/general.js:15 ../../../../js//options/general.js:15
 msgid "General"
-msgstr ""
+msgstr "Главная"
 
 #: ../../../../js/options/general.js:18 ../../../../js//options/general.js:21
 #: ../../../../js/options/general.js:21
 msgid "Storage: "
-msgstr ""
+msgstr "Хранилище"
 
 #: ../../../../js/options/general.js:21 ../../../../js//options/general.js:24
 #: ../../../../js/options/general.js:24
 msgid "Export"
-msgstr ""
+msgstr "Экспорт"
 
 #: ../../../../js/options/general.js:27 ../../../../js//options/general.js:30
 #: ../../../../js/options/general.js:30
 msgid "Import"
-msgstr ""
+msgstr "Импорт"
 
 #: ../../../../js/options/general.js:28 ../../../../js//options/general.js:31
 #: ../../../../js/options/general.js:31
@@ -825,7 +829,7 @@ msgstr ""
 #: ../../../../js/options/general.js:40 ../../../../js//options/general.js:43
 #: ../../../../js/options/general.js:43
 msgid "Erase"
-msgstr ""
+msgstr "Стереть"
 
 #: ../../../../js/options/general.js:41 ../../../../js//options/general.js:44
 #: ../../../../js/options/general.js:44
@@ -836,7 +840,7 @@ msgstr ""
 
 #: ../../../../js/options/user-css.js:14
 msgid "User CSS"
-msgstr ""
+msgstr "Пользовательский CSS"
 
 #: ../../../../js/options/user-css.js:23
 msgid "Update custom CSS"
@@ -862,7 +866,7 @@ msgstr ""
 
 #: ../../../../js/options/user-js.js:14 ../../../../js//options/user-js.js:14
 msgid "User JS"
-msgstr ""
+msgstr "JS-скрипты"
 
 #: ../../../../js/options/user-js.js:23
 msgid "Update custom Javascript"
@@ -886,7 +890,7 @@ msgstr ""
 #: ../../../../js/id_colors.js:6 ../../../../js/id_colors.js:12
 #: ../../../../js//id_colors.js:6 ../../../../js//id_colors.js:12
 msgid "Color IDs"
-msgstr ""
+msgstr "Цветные ID"
 
 #: ../../../../js/auto-reload.js:33 ../../../../js//auto-reload.js:96
 #: ../../../../js/auto-reload.js:107
@@ -895,7 +899,7 @@ msgstr ""
 
 #: ../../../../js/mod/ban-list.js:29 ../../../../js//mod/ban-list.js:29
 msgid "IP address"
-msgstr ""
+msgstr "IP адрес"
 
 #: ../../../../js/mod/ban-list.js:42 ../../../../js//mod/ban-list.js:42
 msgid "Seen"
@@ -911,7 +915,7 @@ msgstr ""
 
 #: ../../../../js/mod/ban-list.js:53 ../../../../js//mod/ban-list.js:53
 msgid "Board"
-msgstr ""
+msgstr "Доска"
 
 #: ../../../../js/mod/ban-list.js:55 ../../../../js//mod/ban-list.js:55
 msgid "all"
@@ -953,7 +957,7 @@ msgstr ""
 #: ../../../../js/auto-reload.js:141 ../../../../js//auto-reload.js:210
 #: ../../../../js/auto-reload.js:222
 msgid "Updating..."
-msgstr ""
+msgstr "Обновление..."
 
 #: ../../../../js/auto-reload.js:183 ../../../../js//auto-reload.js:257
 #: ../../../../js/auto-reload.js:269
@@ -964,30 +968,30 @@ msgstr ""
 #: ../../../../js/auto-reload.js:185 ../../../../js//auto-reload.js:259
 #: ../../../../js/auto-reload.js:271
 msgid "No new posts found"
-msgstr ""
+msgstr "Нет новых постов"
 
 #: ../../../../js/auto-reload.js:191 ../../../../js//auto-reload.js:265
 #: ../../../../js/auto-reload.js:277
 msgid "Thread deleted or pruned"
-msgstr ""
+msgstr "Тред удален"
 
 #: ../../../../js/auto-reload.js:199 ../../../../js//auto-reload.js:273
 #: ../../../../js/auto-reload.js:285
 msgid "Error: "
-msgstr ""
+msgstr "Ошибка:"
 
 #: ../../../../js/auto-reload.js:201 ../../../../js//auto-reload.js:275
 #: ../../../../js/auto-reload.js:287
 msgid "Unknown error"
-msgstr ""
+msgstr "Неизвестная ошибка"
 
 #: ../../../../js/infinite-scroll.js:47 ../../../../js//infinite-scroll.js:47
 msgid "Page"
-msgstr ""
+msgstr "Страница"
 
 #: ../../../../js/infinite-scroll.js:82 ../../../../js//infinite-scroll.js:82
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #: ../../../../templates/main.js:29 ../../../../templates/main.js:47
 #: ../../../../templates//main.js:35 ../../../../templates//main.js:53
@@ -1034,40 +1038,40 @@ msgstr ""
 
 #: ../../../../js//auto-reload.js:41 ../../../../js/auto-reload.js:52
 msgid "Auto update"
-msgstr ""
+msgstr "Автообновление"
 
 #: ../../../../js//auto-reload.js:42 ../../../../js/auto-reload.js:53
 msgid "Auto update thread"
-msgstr ""
+msgstr "Автообновление треда"
 
 #: ../../../../js//auto-reload.js:43 ../../../../js/auto-reload.js:54
 msgid "Show desktop notifications when users quote me"
-msgstr ""
+msgstr "Показать уведомления, когда пользователи цитируют меня"
 
 #: ../../../../js//auto-reload.js:44 ../../../../js/auto-reload.js:55
 msgid "Show desktop notifications on all replies"
-msgstr ""
+msgstr "Показать уведомления на все ответы"
 
 #: ../../../../js//auto-scroll.js:4 ../../../../js//auto-scroll.js:18
 #: ../../../../js/auto-scroll.js:4 ../../../../js/auto-scroll.js:18
 msgid "Scroll to new posts"
-msgstr ""
+msgstr "Прокрутка к новым постам"
 
 #: ../../../../js//captcha.js:30 ../../../../js/captcha.js:30
 msgid "Verification"
-msgstr ""
+msgstr "Капча"
 
 #: ../../../../js//comment-toolbar.js:262
 #: ../../../../js//comment-toolbar.js:268
 #: ../../../../js/comment-toolbar.js:262 ../../../../js/comment-toolbar.js:268
 msgid "Enable formatting keybinds"
-msgstr ""
+msgstr "Включить горячие клавиши"
 
 #: ../../../../js//comment-toolbar.js:263
 #: ../../../../js//comment-toolbar.js:269
 #: ../../../../js/comment-toolbar.js:263 ../../../../js/comment-toolbar.js:269
 msgid "Show formatting toolbar"
-msgstr ""
+msgstr "Показать панель форматирования"
 
 #: ../../../../js//download-all.js:8 ../../../../js/download-all.js:8
 msgid "Download All"
@@ -1075,24 +1079,24 @@ msgstr ""
 
 #: ../../../../js//forced-anon.js:73 ../../../../js/forced-anon.js:73
 msgid "Hide IDs"
-msgstr ""
+msgstr "Скрыть ID"
 
 #: ../../../../js//image-hover.js:14 ../../../../js/image-hover.js:14
 msgid "Image hover"
-msgstr ""
+msgstr "При наведении курсора"
 
 #: ../../../../js//image-hover.js:15 ../../../../js/image-hover.js:15
 msgid "Image hover on catalog"
-msgstr ""
+msgstr "При наведении курсора в каталоге тредов"
 
 #: ../../../../js//image-hover.js:16 ../../../../js/image-hover.js:16
 msgid "Image hover should follow cursor"
-msgstr ""
+msgstr "Всплывать возле курсора"
 
 #: ../../../../js//inline-expanding.js:193
 #: ../../../../js/inline-expanding.js:193
 msgid "Number of simultaneous image downloads (0 to disable): "
-msgstr ""
+msgstr "Количество одновременных загрузок (0 для выкл):"
 
 #: ../../../../js//katex-enable.js:15 ../../../../js/katex-enable.js:15
 msgid "Error: Invalid LaTeX syntax."
@@ -1100,34 +1104,34 @@ msgstr ""
 
 #: ../../../../js//local-time.js:89 ../../../../js/local-time.js:89
 msgid "Show relative time"
-msgstr ""
+msgstr "Показать относительное время"
 
 #: ../../../../js//options/fav.js:27 ../../../../js/options/fav.js:27
 msgid "Favorites"
-msgstr ""
+msgstr "Избранное"
 
 #: ../../../../js//options/fav.js:42 ../../../../js/options/fav.js:42
 msgid "Drag the boards to sort them."
-msgstr ""
+msgstr "Включить перетаскивание файла."
 
 #: ../../../../js//options/general.js:18 ../../../../js/options/general.js:18
 msgid "Note: Most option changes will only take effect on future page loads."
-msgstr ""
+msgstr "Примечание: Большинство изменений требует перезагрузки страницы"
 
 #: ../../../../js//options/user-css.js:15
 #: ../../../../js/options/user-css.js:15
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 #: ../../../../js//options/user-css.js:23
 #: ../../../../js/options/user-css.js:23
 msgid "Save custom CSS"
-msgstr ""
+msgstr "Сохранить пользовательский CSS"
 
 #: ../../../../js//options/user-css.js:42
 #: ../../../../js/options/user-css.js:43
 msgid "Board-specific CSS"
-msgstr ""
+msgstr "CSS доски"
 
 #: ../../../../js//options/user-css.js:54
 #: ../../../../js/options/user-css.js:56
@@ -1169,11 +1173,11 @@ msgstr ""
 #: ../../../../js//show-own-posts.js:36 ../../../../js//show-own-posts.js:49
 #: ../../../../js/show-own-posts.js:36 ../../../../js/show-own-posts.js:49
 msgid "(You)"
-msgstr ""
+msgstr "(you)"
 
 #: ../../../../js//treeview.js:18 ../../../../js/treeview.js:18
 msgid "Use tree view by default"
-msgstr ""
+msgstr "Использовать древовидный просмотр"
 
 #: ../../../../js//update_boards.js:6 ../../../../js/update_boards.js:6
 msgid "Show top boards"
@@ -1181,43 +1185,43 @@ msgstr ""
 
 #: ../../../../js//webm-settings.js:57 ../../../../js/webm-settings.js:57
 msgid "Loop videos by default"
-msgstr ""
+msgstr "Повторять видео"
 
 #: ../../../../js//youtube.js:28 ../../../../js/youtube.js:28
 msgid "YouTube size"
-msgstr ""
+msgstr "Размер окна YouTube"
 
 #: ../../../../templates//main.js:96 ../../../../templates/main.js:96
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 #: ../../../../templates//main.js:102 ../../../../templates/main.js:102
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: ../../../../templates//main.js:325 ../../../../templates/main.js:330
 msgid "Hide post options &amp; limits"
-msgstr ""
+msgstr "Скрыть опции"
 
 #: ../../../../templates//main.js:329 ../../../../templates/main.js:334
 msgid "Show post options &amp; limits"
-msgstr ""
+msgstr "Показать опции"
 
 #: ../../../../js/fix-report-delete-submit.js:15
 msgid "Delete post"
-msgstr ""
+msgstr "Удалить пост"
 
 #: ../../../../js/fix-report-delete-submit.js:16
 msgid "Delete file"
-msgstr ""
+msgstr "Удалить файл"
 
 #: ../../../../js/fix-report-delete-submit.js:38
 msgid "Global report"
-msgstr ""
+msgstr "Глобальная жалоба"
 
 #: ../../../../js/thread-watcher.js:32
 msgid "Thread #"
-msgstr ""
+msgstr "Тред #"
 
 #: ../../../../js/thread-watcher.js:47
 msgid "Clear List"
@@ -1229,7 +1233,7 @@ msgstr ""
 
 #: ../../../../js/thread-watcher.js:83
 msgid "Reply"
-msgstr ""
+msgstr "Ответ"
 
 #: ../../../../js/thread-watcher.js:150
 msgid "watchlist"
@@ -1253,11 +1257,11 @@ msgstr ""
 
 #: ../../../../js/comment-toolbar.js:16
 msgid "Spoiler"
-msgstr ""
+msgstr "Спойлер"
 
 #: ../../../../js/comment-toolbar.js:24
 msgid "Italics"
-msgstr ""
+msgstr "Курсив"
 
 #: ../../../../js/comment-toolbar.js:32 ../../../../js/wPaint/2ch.js:2580
 #: ../../../../js/wPaint/oekaki.js:3
@@ -1265,27 +1269,27 @@ msgstr ""
 #: ../../../../js/wPaint/plugins/text/src/wPaint.menu.text.js:9
 #: ../../../../js/wPaint/lib/plugins.js:356 ../../../../js/wPaint/8ch.js:2561
 msgid "Bold"
-msgstr ""
+msgstr "Жирный"
 
 #: ../../../../js/comment-toolbar.js:40
 msgid "Underline"
-msgstr ""
+msgstr "Подчеркивание"
 
 #: ../../../../js/comment-toolbar.js:48
 msgid "Code"
-msgstr ""
+msgstr "Код"
 
 #: ../../../../js/comment-toolbar.js:56
 msgid "Strike"
-msgstr ""
+msgstr "Зачеркивание"
 
 #: ../../../../js/comment-toolbar.js:64
 msgid "Heading"
-msgstr ""
+msgstr "Заголовок"
 
 #: ../../../../js/comment-toolbar.js:274
 msgid "Customize Formatting"
-msgstr ""
+msgstr "Настройки Форматирования"
 
 #: ../../../../js/comment-toolbar.js:298
 msgid "Add Rule"
@@ -1307,19 +1311,19 @@ msgstr ""
 #: ../../../../js/wPaint/lib/wColorPicker.js:28
 #: ../../../../js/wPaint/8ch.js:409
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #: ../../../../js/wPaint/2ch.js:428 ../../../../js/wPaint/wPaint.min.js:409
 #: ../../../../js/wPaint/lib/wColorPicker.js:28
 #: ../../../../js/wPaint/8ch.js:409
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #: ../../../../js/wPaint/2ch.js:428 ../../../../js/wPaint/wPaint.min.js:409
 #: ../../../../js/wPaint/lib/wColorPicker.js:28
 #: ../../../../js/wPaint/8ch.js:409
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../../../js/wPaint/2ch.js:428 ../../../../js/wPaint/wPaint.min.js:409
 #: ../../../../js/wPaint/lib/wColorPicker.js:28
@@ -1415,14 +1419,14 @@ msgstr ""
 #: ../../../../js/wPaint/plugins/text/src/wPaint.menu.text.js:15
 #: ../../../../js/wPaint/lib/plugins.js:362 ../../../../js/wPaint/8ch.js:2567
 msgid "Italic"
-msgstr ""
+msgstr "Курсив"
 
 #: ../../../../js/wPaint/2ch.js:2597 ../../../../js/wPaint/oekaki.js:3
 #: ../../../../js/wPaint/plugins/text/text.js:26
 #: ../../../../js/wPaint/plugins/text/src/wPaint.menu.text.js:26
 #: ../../../../js/wPaint/lib/plugins.js:373 ../../../../js/wPaint/8ch.js:2578
 msgid "Font Size"
-msgstr ""
+msgstr "Размер шрифта"
 
 #: ../../../../js/wPaint/2ch.js:2605 ../../../../js/wPaint/oekaki.js:3
 #: ../../../../js/wPaint/plugins/text/text.js:34
@@ -1506,7 +1510,7 @@ msgstr ""
 
 #: ../../../../js/wPaint/plugins/file/src/wPaint.menu.main.file.js:8
 msgid "Save Image"
-msgstr ""
+msgstr "Сохранить Изображение"
 
 #: ../../../../js/wPaint/plugins/file/src/wPaint.menu.main.file.js:18
 msgid "Load Image to Foreground"
@@ -1518,45 +1522,45 @@ msgstr ""
 
 #: ../../../../js/post-filter.js:205
 msgid "Hide post"
-msgstr ""
+msgstr "Скрыть пост"
 
 #: ../../../../js/post-filter.js:206
 msgid "Unhide post"
-msgstr ""
+msgstr "Раскрыть пост"
 
 #: ../../../../js/post-filter.js:208
 msgid "Add filter"
-msgstr ""
+msgstr "Добавить фильтр"
 
 #: ../../../../js/post-filter.js:209
 msgid "Post +"
-msgstr ""
+msgstr "Пост +"
 
 #: ../../../../js/post-filter.js:209
 msgid "Hide post and all replies"
-msgstr ""
+msgstr "Пост и все ответы на него"
 
 #: ../../../../js/post-filter.js:210 ../../../../js/post-filter.js:216
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: ../../../../js/post-filter.js:211
 msgid "ID +"
-msgstr ""
+msgstr "ID +"
 
 #: ../../../../js/post-filter.js:211
 msgid "Hide ID and all replies"
-msgstr ""
+msgstr "Скрыть ID и все ответы"
 
 #: ../../../../js/post-filter.js:212 ../../../../js/post-filter.js:217
 #: ../../../../js/post-filter.js:651
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: ../../../../js/post-filter.js:213 ../../../../js/post-filter.js:218
 #: ../../../../js/post-filter.js:652
 msgid "Tripcode"
-msgstr ""
+msgstr "Трипкод"
 
 #: ../../../../js/post-filter.js:215
 msgid "Remove filter"
@@ -1564,15 +1568,15 @@ msgstr ""
 
 #: ../../../../js/post-filter.js:647
 msgid "Filters"
-msgstr ""
+msgstr "Фильтры"
 
 #: ../../../../js/post-filter.js:653
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 #: ../../../../js/post-filter.js:659
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: ../../../../js/post-filter.js:660
 msgid "Clear all filters"
@@ -1584,8 +1588,8 @@ msgstr ""
 
 #: ../../../../js/post-filter.js:662
 msgid "yes"
-msgstr ""
+msgstr "да"
 
 #: ../../../../js/post-filter.js:662
 msgid "no"
-msgstr ""
+msgstr "нет"
