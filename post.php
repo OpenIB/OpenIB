@@ -24,7 +24,7 @@ if (isset($_POST['delete'])) {
 	$password = &$_POST['password'];
 	
 	if ($password == '')
-		error($config['error']['invalidpassword']);
+		error($config['error']['cantemptypassword']);
 	
 	$delete = array();
 	foreach ($_POST as $post => $value) {
@@ -64,8 +64,9 @@ if (isset($_POST['delete'])) {
 				$thread = $thread_query->fetch(PDO::FETCH_ASSOC);	
 			}
 
-			if ($password != '' && $post['password'] != $password && (!$thread || $thread['password'] != $password))
-				error($config['error']['invalidpassword']);
+			if ($password != '' && $post['password'] !== $password && (!$thread || $thread['password'] !== $password))
+				error($config['error']['invalidpasswordtryrefresh']);
+					
 			
 			if ($post['time'] > time() - $config['delete_time'] && (!$thread || $thread['password'] != $password)) {
 				error(sprintf($config['error']['delete_too_soon'], until($post['time'] + $config['delete_time'])));
@@ -263,6 +264,9 @@ elseif (isset($_POST['post'])) {
 	// Check if banned
 	checkBan($board['uri']);
 
+	if(isset($_POST['password']) && $_POST['password']=="")
+		error($config['error']['passwordrequired']);
+	
 	// Check for CAPTCHA right after opening the board so the "return" link is in there
 	//if ($config['captcha']['enabled']) {
 	//New thread captcha
