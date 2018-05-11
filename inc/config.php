@@ -1148,6 +1148,7 @@
 	$config['error']['invalid_embed']	= _('Couldn\'t make sense of the URL of the video you tried to embed.');
 	$config['error']['captcha']		= _('You seem to have mistyped the verification.');
 	$config['error']['images_disabled'] = _('Uploading files is disabled on this board.');
+	$config['error']['edit_page_rules'] = _('Page names must be lower than 20 characters and may only contain lowercase letters a-z and digits 1-9. Page names may not contain only digits.');
 
 	// mod.php errors
 	$config['error']['toomanyunban']	= _('You are only allowed to unban %s users at a time. You tried to unban %u users.');
