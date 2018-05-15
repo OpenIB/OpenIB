@@ -24,7 +24,7 @@
 				{% trans %}Email{% endtrans %}
 			</th>
 			<td>
-				{% if config.field_email_selectbox and not (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri)) %}
+				{% if thread.force_anon or config.field_email_selectbox and not (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri)) %}
 				<select name="email" id="email_selectbox" autocomplete="off">
 					<option value=""></option>
 					<option value="sage">sage</option>
@@ -33,12 +33,13 @@
 				{% else %}
 				<input type="text" name="email" size="25" maxlength="40" autocomplete="off">
 				{% endif %}
-				{% if not (not (config.field_disable_subject or (id and config.field_disable_reply_subject)) or (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri))) %}
+				{% if thread.force_anon==1 or not (not (config.field_disable_subject or (id and config.field_disable_reply_subject)) or (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri))) %}
 				<input accesskey="s" style="margin-left:2px;" type="submit" name="post" value="{% if id %}{{ config.button_reply }}{% else %}{{ config.button_newtopic }}{% endif %}" />
 				{% endif %}
 			</td>
 		</tr>{% endif %}
 		{% if not (config.field_disable_subject or (id and config.field_disable_reply_subject)) or (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri)) %}<tr>
+			{% if thread.force_anon==0 %}
 			<th>
 				{% trans %}Subject{% endtrans %} {% if config.force_subject_op and not id %}<span class="required-star">*</span>{% endif %}
 			</th>
@@ -47,6 +48,7 @@
 				<input accesskey="s" style="margin-left:2px;" type="submit" name="post" value="{% if id %}{{ config.button_reply }}{% else %}{{ config.button_newtopic }}{% endif %}" />
 			</td>
 		</tr>
+			{% endif %}
 		{% endif %}
 		<tr>
 			<th>
@@ -222,12 +224,11 @@
 
                                 <!-- Force Anon-->
                                 {% if not id and config.force_anon_thread %}
-                                <div class="force-anon">
-                                  <label><input title="Force Anonymous" id="force_anon" name="force_anon" type="checkbox">
-                                  {% trans %}Force Anonymous{% endtrans %}
-                                  <br/>
-                                  <span class="unimportant hint">{% trans %}(reply to this thread will be forced anonymous){% endtrans %}</label>
-                                </div>
+                                  <div class="force-anon">
+                                    <label><input title="Forced anonymous" id="force_anon" name="force_anon" type="checkbox">{% trans %}Forced anonymous{% endtrans %}
+                                    <br/>
+                                    <span class="unimportant hint">{% trans %}(no tripfags/namefags in your thread){% endtrans %}</label>
+                                  </div>
                                 {% endif %}
                                 <!--End Force Anon-->
 
