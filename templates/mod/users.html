@@ -23,7 +23,15 @@
 			</td>
 			<td>
 				{% if config.mod.groups[user.type] %}
-					{{ config.mod.groups[user.type] }}
+                                        {% if config.mod.groups[user.type]=="GlobalVolunteer" %}
+                                                Global Volunteer
+                                        {% elseif config.mod.groups[user.type]=="Mod" %}
+                                                Board Owner
+                                        {% elseif config.mod.groups[user.type]=="BoardVolunteer" %}
+                                                Board Volunteer
+                                        {% else %}
+                                                {{ config.mod.groups[user.type] }}
+                                        {% endif %}				
 				{% else %}
 					<em>{% trans 'Unknown' %}</em> ({{ user.type }})
 				{% endif %}
