@@ -76,7 +76,7 @@ $current_locale = 'en';
 
 
 function loadConfig() {
-	global $board, $config, $__ip, $__version, $microtime_start, $current_locale, $events;
+	global $board, $config, $__ip, $debug, $__version, $microtime_start, $current_locale, $events;
 
 	$error = function_exists('error') ? 'error' : 'basic_error_function_because_the_other_isnt_loaded_yet';
 
@@ -315,6 +315,7 @@ function loadConfig() {
 			'$config = array();'.
 			'$config[\'cache\'] = '.var_export($config['cache'], true).';'.
 			'$config[\'cache_config\'] = true;'.
+			'$config[\'debug\'] = '.var_export($config['debug'], true).';'.					  
 			'require_once(\'inc/cache.php\');'
 		);
 
@@ -323,6 +324,25 @@ function loadConfig() {
 		Cache::set('config_'.$boardsuffix, $config);
 		Cache::set('events_'.$boardsuffix, $events);
 	}
+	if ($config['debug']) {	
+		if (!isset($debug)) {	
+			$debug = array(	
+				'sql' => array(),	
+				'exec' => array(),	
+				'purge' => array(),	
+				'cached' => array(),	
+				'write' => array(),	
+				'time' => array(	
+					'db_queries' => 0,	
+					'exec' => 0,	
+				),	
+				'start' => $microtime_start,	
+				'start_debug' => microtime(true)	
+			);	
+			$debug['start'] = $microtime_start;	
+		}	
+	}	
+}	
 }
 
 function basic_error_function_because_the_other_isnt_loaded_yet($message, $priority = true) {
@@ -590,8 +610,8 @@ function cloudflare_purge($uri) {
 }
 
 function purge($uri, $cloudflare = false) {
-	global $config;
-
+	global $config, $debug;	
+	
 	if ($cloudflare) {
 		cloudflare_purge($uri);
 	}
@@ -612,6 +632,10 @@ function purge($uri, $cloudflare = false) {
 		$uri = $config['root'] . $uri;
 	}
 
+	if ($config['debug']) {	
+		$debug['purge'][] = $uri;	
+	}	
+
 	foreach ($config['purge'] as &$purge) {
 		$host = &$purge[0];
 		$port = &$purge[1];
@@ -628,8 +652,8 @@ function purge($uri, $cloudflare = false) {
 }
 
 function file_write($path, $data, $simple = false, $skip_purge = false) {
-	global $config;
-
+	global $config, $debug;	
+	
 	if (preg_match('/^remote:\/\/(.+)\:(.+)$/', $path, $m)) {
 		if (isset($config['remote'][$m[1]])) {
 			require_once 'inc/remote.php';
@@ -755,6 +779,10 @@ function file_unlink($path) {
 		}
 		purge($path);
 	}
+	
+	if ($config['debug']) {	
+		$debug['write'][] = $path . ': ' . $bytes . ' bytes';	
+	}	
 
 	event('unlink', $path);
 
@@ -2830,6 +2858,17 @@ function shell_exec_error($command, $suppress_stdout = false) {
 	
 	$return = trim(shell_exec('PATH="' . escapeshellcmd($config['shell_path']) . ':$PATH";' .
 		$command . ' 2>&1 ' . ($suppress_stdout ? '> /dev/null ' : '') . '&& echo "TB_SUCCESS"'));
+	if( $config['debug'] ) {	
+		$time       = microtime(true) - $start;	
+			
+		$debug['exec'][] = array(	
+			'command'  => $command,	
+			'time' => '~' . round($time * 1000, 2) . 'ms',	
+			'response' => $return ? $return : null	
+		);	
+		$debug['time']['exec'] += $time;	
+	}	
+		
 	$return = preg_replace('/TB_SUCCESS$/', '', $return);
 	
 	return $return === 'TB_SUCCESS' ? false : $return;
