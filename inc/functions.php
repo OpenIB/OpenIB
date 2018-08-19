@@ -343,7 +343,6 @@ function loadConfig() {
 		}	
 	}	
 }	
-}
 
 function basic_error_function_because_the_other_isnt_loaded_yet($message, $priority = true) {
 	global $config;
