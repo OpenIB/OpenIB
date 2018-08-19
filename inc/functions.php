@@ -755,7 +755,13 @@ function file_write($path, $data, $simple = false, $skip_purge = false) {
 }
 
 function file_unlink($path) {
-	global $config;
+	global $config, $debug;
+
+	if ($config['debug']) {	
+		if (!isset($debug['unlink']))	
+			$debug['unlink'] = array();	
+		$debug['unlink'][] = $path;	
+	}	
 
 	$ret = @unlink($path);
 
@@ -1550,8 +1556,8 @@ function thread_find_page($thread) {
 }
 
 function index($page, $mod=false) {
-	global $board, $config;
-
+	global $board, $config, $debug;	
+	
 	$body = '';
 	$offset = round($page*$config['threads_per_page']-$config['threads_per_page']);
 
@@ -1867,8 +1873,8 @@ function mute() {
 }
 
 function checkMute() {
-	global $config;
-
+	global $config, $debug;	
+	
 	if ($config['cache']['enabled']) {
 		$identity = getIdentity();
 		// Cached mute?
@@ -2854,7 +2860,11 @@ function DNS($host) {
 }
 
 function shell_exec_error($command, $suppress_stdout = false) {
-	global $config;
+	global $config, $debug;
+	
+	if( $config['debug'] ) {	
+		$start = microtime(true);	
+	}	
 	
 	$return = trim(shell_exec('PATH="' . escapeshellcmd($config['shell_path']) . ':$PATH";' .
 		$command . ' 2>&1 ' . ($suppress_stdout ? '> /dev/null ' : '') . '&& echo "TB_SUCCESS"'));
