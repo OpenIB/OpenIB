@@ -8,3 +8,11 @@
 		</p>
 	{% endif %}
 </div>
+{% if debug and config.debug %}	
+	<hr>	
+	<h3>{% trans 'Error information' %}</h3>	
+	<pre style="white-space:pre-wrap;font-size: 10px;">	
+		{{ debug }}	
+	</pre>	
+	<hr>	
+{%  endif %} 
