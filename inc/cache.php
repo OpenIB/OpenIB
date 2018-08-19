@@ -30,8 +30,8 @@ class Cache {
 		}
 	}
 	public static function get($key) {
-		global $config;
-
+		global $config, $debug;	
+		
                 if ($key != 'all_boards_indexed' && $key != 'all_boards') {
                         return false;
                 }
@@ -71,12 +71,14 @@ class Cache {
 				$data = json_decode(self::$cache->get($key), true);
 				break;
 		}
-				
+		if ($config['debug'])	
+			$debug['cached'][] = $key . ($data === false ? ' (miss)' : ' (hit)');	
+						
 		return $data;
 	}
 	public static function set($key, $value, $expires = false) {
-		global $config;
-
+		global $config, $debug;	
+		
                 if ($key != 'all_boards_indexed' && $key != 'all_boards') {
                         return false;
                 }
@@ -112,7 +114,11 @@ class Cache {
 				self::$cache[$key] = $value;
 				break;
 		}	
+			
+		if ($config['debug'])	
+			$debug['cached'][] = $key . ' (set)';
 	}
+	
 	public static function delete($key) {
 		global $config;
 		
@@ -144,10 +150,12 @@ class Cache {
 				unset(self::$cache[$key]);
 				break;
 		}		
+			
+		if ($config['debug'])	
+			$debug['cached'][] = $key . ' (deleted)';		
 	}
 	public static function flush() {
-		global $config;
-		
+		global $config, $debug;	
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
