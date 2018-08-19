@@ -166,6 +166,8 @@ function check_login($prompt = false) {
 			'boards' => explode(',', $user['boards'])
 		);
 	}
+	if ($config['debug'])	
+		$parse_start_time = microtime(true);	
 
 	// Fix for magic quotes
 	if (get_magic_quotes_gpc()) {
