@@ -259,7 +259,7 @@ Alternatively, you can go to <a href="https://8ch.net/sudo/catalog.html" target=
 
 <a id="could-you-add-a-new-feature"></a><h2>Could you add a new feature?</h2>
 <p>To discuss 8chan's technical issues and request new features (which may or may not be implemented), please go to <a target="_blank" href="https://8ch.net/sudo/catalog.html">/sudo/</a>.</p>
-<p>Alternatively, <a target="_blank" href="https://github.com/ctrlcctrlv/infinity/issues">open a GitHub issue</a>. Better yet, write it yourself and open a <a target="_blank" href="https://github.com/ctrlcctrlv/infinity/pulls">pull request</a>.</p>
+<p>Alternatively, <a target="_blank" href="https://github.com/OpenIB/OpenIB/issues">open a GitHub issue</a>. Better yet, write it yourself and open a <a target="_blank" href="https://github.com/OpenIB/OpenIB/pulls">pull request</a>.</p>
 <p align="right" style="font-size:0.7em"><a href="#top-faq">[Back to Index]</a></p>
 
 
