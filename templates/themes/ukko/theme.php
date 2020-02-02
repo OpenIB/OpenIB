@@ -20,7 +20,7 @@
 		public $settings;
 		public function build($mod = false) {
 			global $config, $board;
-			$boards = listBoards();
+			$boards = listBoards(TRUE);
 			
 			$body = '';
 			$overflow = array();
@@ -32,6 +32,8 @@
 
 			$query = '';
 			foreach($boards as &$_board) {
+				if((!$_board['indexed']))
+					continue;
 				if(in_array($_board['uri'], explode(' ', $this->settings['exclude'])))
 					continue;
 				$query .= sprintf("SELECT *, '%s' AS `board` FROM ``posts_%s`` WHERE `thread` IS NULL UNION ALL ", $_board['uri'], $_board['uri']);
