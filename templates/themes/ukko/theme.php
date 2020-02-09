@@ -32,7 +32,7 @@
 
 			$query = '';
 			foreach($boards as &$_board) {
-				if((!$_board['indexed']))
+				if(!$_board['indexed'])
 					continue;
 				if(in_array($_board['uri'], explode(' ', $this->settings['exclude'])))
 					continue;
