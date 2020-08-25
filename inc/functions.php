@@ -780,8 +780,8 @@ function hasPermission($action = null, $board = null, $_mod = null) {
 
 	if (!isset($mod['boards']))
 		return false;
-
-	if (!in_array('*', $mod['boards']) && !in_array($board, $mod['boards']))
+	
+	if (!in_array('*', $mod['boards']) && !in_array($board, $mod['boards'],true))
 		return false;
 
 	return true;

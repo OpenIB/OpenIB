@@ -1133,6 +1133,7 @@
 	$config['error']['toomanyreports']	= _('You can\'t report that many posts at once.');
 	$config['error']['invalidpassword']	= _('Wrong password…');
 	$config['error']['invalidimg']		= _('Invalid image.');
+	$config['error']['invalidimgfiletype']    = _('Wrong file type!');
 	$config['error']['unknownext']		= _('Unknown file extension.');
 	$config['error']['filesize']		= _('Maximum file size: %maxsz% bytes<br>Your file\'s size: %filesz% bytes');
 	$config['error']['maxsize']		= _('The file was too big.');
@@ -1148,6 +1149,7 @@
 	$config['error']['invalid_embed']	= _('Couldn\'t make sense of the URL of the video you tried to embed.');
 	$config['error']['captcha']		= _('You seem to have mistyped the verification.');
 	$config['error']['images_disabled'] = _('Uploading files is disabled on this board.');
+	$config['error']['edit_page_rules'] = _('Page names must be lower than 20 characters and may only contain lowercase letters a-z and digits 1-9. Page names may not contain only digits.');
 
 	// mod.php errors
 	$config['error']['toomanyunban']	= _('You are only allowed to unban %s users at a time. You tried to unban %u users.');
@@ -1781,3 +1783,5 @@
 	$config['version'] = '+ <a href="https://github.com/ctrlcctrlv/infinity">infinity</a> + <a href="https://github.com/OpenIB/OpenIB/">OpenIB</a>';
 
 	$config['hashSalt'] = "salt";
+
+	$config['webdomain'] = "https://8ch.net";

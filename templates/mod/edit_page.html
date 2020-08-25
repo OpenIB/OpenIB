@@ -20,7 +20,7 @@
 		<tr><th>{% trans %}Page content{% endtrans %}
 		<br/>
 		<span class="unimportant">{% trans %}Page will appear at:{% endtrans %} 
-		{% if board %} <a href="https://8ch.net/{{ board.uri }}/{{ page.name }}.html">https://8ch.net/{{ board.uri }}/{{ page.name }}.html</a>
+		{% if board or board_page == "0" %} <a href="https://8ch.net/{{ board_page }}/{{ page.name }}.html">{{ config.domain }}/{{ board_page }}/{{ page.name }}.html</a>
 		{% else %} <a href="/{{ page.name }}.html">{{ config.site }}/{{ page.name }}.html</a>
 		{% endif %}</span></th><td><textarea name="content" style="height:500px;width:500px">{{content}}</textarea></td><tr>
 	</table>

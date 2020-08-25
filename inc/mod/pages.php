@@ -129,6 +129,15 @@ function mod_dashboard() {
 	
 	modLog('Looked at dashboard', false);
 	
+	$args['displayboards'] = array();
+    	if($mod['boards'][0]!="*"){
+      		foreach($args['boards'] as $boarddisplay){
+          		if(in_array($boarddisplay['uri'], $mod['boards'],true)){
+            			$args['displayboards'][] = $boarddisplay;
+          		}
+      		}
+    	}
+
 	mod_page(_('Dashboard'), 'mod/dashboard.html', $args);
 }
 
@@ -963,7 +972,7 @@ function mod_page_ip_less($b, $id) {
 	}
 	
 	if (hasPermission($config['mod']['modlog_ip'])) {
-		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE `text` LIKE :search ORDER BY `time` DESC LIMIT 50");
+		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE MATCH ( text ) AGAINST ( :search ) and board = :board ORDER BY `time` DESC LIMIT 50");
 		$query->bindValue(':search', '%' . $ip . '%');
 		$query->execute() or error(db_error($query));
 		$args['logs'] = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -2459,18 +2468,7 @@ function mod_users() {
 	if (!hasPermission($config['mod']['manageusers']))
 		error($config['error']['noaccess']);
 	
-	$query = query("SELECT ``m``.`id`, ``m``.`username`, ``m``.`boards`, ``m``.`type`, ``m``.`email`, 
-	``ml``.`time` last, ``ml``.`text` action
-	FROM ``mods`` AS m
-	LEFT JOIN (
-	    SELECT ml1.* 
-	    FROM ``modlogs`` AS ml1 
-	    JOIN (
-	        SELECT `mod`, MAX(time) AS time
-	        FROM ``modlogs``
-	        GROUP BY `mod`   
-	    ) AS ml2 USING (`mod`, time)
-	) AS ml ON m.id = ml.`mod` GROUP BY ``m``.`id` ORDER BY ``m``.`type` DESC;") or error(db_error());
+	$query = prepare("with s as ( select `mod`, max(time) as time from modlogs group by `mod` ) select m.id, m.username, m.boards, m.type, m.email, s.time as last, ml.text as action  from mods as m left join s on ( m.id = s.`mod` ) left join modlogs as ml on ( m.id = ml.`mod` and s.time = ml.time ) group by m.id order by m.type desc;") or error(db_error());
 	$users = $query->fetchAll(PDO::FETCH_ASSOC);
 	
 	foreach ($users as &$user) {
@@ -3792,10 +3790,10 @@ function mod_theme_rebuild($theme_name) {
 function delete_page_base($page = '', $board = false) {
 	global $config, $mod;
 
-	if (empty($board))
+	if (empty($board) && $board !== "0"){
 		$board = false;
 
-	if (!$board && $mod['boards'][0] !== '*')
+	if (!$board && $mod['boards'][0] !== '*' && $board !== "0")
 		error($config['error']['noaccess']);
 
 	if (!hasPermission($config['mod']['edit_pages'], $board))
@@ -3804,20 +3802,20 @@ function delete_page_base($page = '', $board = false) {
 	if ($board !== FALSE && !openBoard($board))
 		error($config['error']['noboard']);
 
-	if (preg_match('/^[a-z0-9]{1,255}$/', $page) && !preg_match('/^(index|catalog|index\+50)|(\d+)$/', $page)) {
-		if ($board) {
+	if (preg_match('/^[a-z0-9]{1,255}$/', $page) && !preg_match('/^(index|catalog|index\+50)$/', $page) && !ctype_digit($page)) {
+		if ($board || $board==="0") {
 			$query = prepare('DELETE FROM ``pages`` WHERE `board` = :board AND `name` = :name');
-			$query->bindValue(':board', ($board ? $board : NULL));
+			$query->bindValue(':board', ($board || $board === "0" ? $board : NULL));
 		} else {
 			$query = prepare('DELETE FROM ``pages`` WHERE `board` IS NULL AND `name` = :name');
 		}
 		$query->bindValue(':name', $page);
 		$query->execute() or error(db_error($query));
 
-		@file_unlink(($board ? ($board . '/') : '') . $page . '.html');
+		@file_unlink(($board || $board==="0" ? ($board . '/') : '') . $page . '.html');
 	}
 
-	header('Location: ?/edit_pages' . ($board ? ('/' . $board) : ''), true, $config['redirect_http']);
+	header('Location: ?/edit_pages' . ($board || $board === '0' ? ('/' . $board) : ''), true, $config['redirect_http']);
 }
 
 function mod_delete_page($page = '') {
@@ -3839,7 +3837,7 @@ function mod_edit_page($id) {
 	if (!$page)
 		error(_('Could not find the page you are trying to edit.'));
 
-	if (!$page['board'] && $mod['boards'][0] !== '*')
+	if (!$page['board'] && $mod['boards'][0] !== '*' && $mod['boards'][0] !== "0")
 		error($config['error']['noaccess']);
 
 	if (!hasPermission($config['mod']['edit_pages'], $page['board']))
@@ -3884,7 +3882,7 @@ function mod_edit_page($id) {
 		$query->bindValue(':id', $id);
 		$query->execute() or error(db_error($query));
 
-		$fn = ($board['uri'] ? ($board['uri'] . '/') : '') . $page['name'] . '.html';
+		$fn = ($page['board'] || $page['board']==="0" ? ($page['board'] . '/') : '') . $page['name'] . '.html';
 		$body = "<div class='ban'>$write</div>";
 		$html = Element('page.html', array('config' => $config, 'body' => $body, 'title' => utf8tohtml($page['title'])));
 		file_write($fn, $html);
@@ -3899,25 +3897,30 @@ function mod_edit_page($id) {
 		$content = $query->fetchColumn();
 	}
 	
-	mod_page(sprintf(_('Editing static page: %s'), $page['name']), 'mod/edit_page.html', array('page' => $page, 'token' => make_secure_link_token("edit_page/$id"), 'content' => prettify_textarea($content), 'board' => $board));
+	mod_page(sprintf(_('Editing static page: %s'), $page['name']), 'mod/edit_page.html', array('page' => $page, 'token' => make_secure_link_token("edit_page/$id"), 'content' => prettify_textarea($content), 'board' => $board, 'board_page' => $page['board']));
+
 }
 
 function mod_pages($board = false) {
 	global $config, $mod, $pdo;
 
-	if (empty($board))
+	if (empty($board) && $board !== "0"){
 		$board = false;
+	}
 
-	if (!$board && $mod['boards'][0] !== '*')
+	if (!$board && $mod['boards'][0] !== '*' && $board !== "0")
 		error($config['error']['noaccess']);
 
 	if (!hasPermission($config['mod']['edit_pages'], $board))
 		error($config['error']['noaccess']);
 
+	if($mod['type']!="20" && $mod['boards'][0]=="*" && ($board || $board==="0"))
+		error($config['error']['noaccess']);
+
 	if ($board !== FALSE && !openBoard($board))
 		error($config['error']['noboard']);
 
-	if ($board) {
+	if ($board || $board==="0") {
 		$query = prepare('SELECT * FROM ``pages`` WHERE `board` = :board');
 		$query->bindValue(':board', $board);
 	} else {
@@ -3927,15 +3930,18 @@ function mod_pages($board = false) {
 	$pages = $query->fetchAll(PDO::FETCH_ASSOC);
 
 	if (isset($_POST['page'])) {
-		if ($board and sizeof($pages) > $config['pages_max'])
+		if (($board || $board==="0") and sizeof($pages) > $config['pages_max'])
 			error(sprintf(_('Sorry, this site only allows %d pages per board.'), $config['pages_max']));
 
-		if (!preg_match('/^[a-z0-9]{1,255}$/', $_POST['page']))
-			error(_('Page names must be < 255 chars and may only contain lowercase letters A-Z and digits 1-9.'));
+		if (!preg_match('/^[a-z1-9]{1,20}$/', $_POST['page']))
+			error($config['error']['edit_page_rules']);
 
-		if (preg_match('/^(index|catalog|index\+50)|(\d+)$/', $_POST['page']))
-			error(_('Nope.'));
+		if (preg_match('/^(index|catalog|index\+50)$/', $_POST['page']))
+			error($config['error']['edit_page_rules']);
 
+		if( ctype_digit($_POST['page']) )
+			error($config['error']['edit_page_rules']);
+		
 		foreach ($pages as $i => $p) {
 			if ($_POST['page'] === $p['name'])
 				error(_('Refusing to create a new page with the same name as an existing one.'));
@@ -3944,7 +3950,7 @@ function mod_pages($board = false) {
 		$title = ($_POST['title'] ? $_POST['title'] : NULL);
 
 		$query = prepare('INSERT INTO ``pages``(board, title, name) VALUES(:board, :title, :name)');
-		$query->bindValue(':board', ($board ? $board : NULL));
+		$query->bindValue(':board', ($board || $board==="0" ? $board : NULL));
 		$query->bindValue(':title', $title);
 		$query->bindValue(':name', $_POST['page']);
 		$query->execute() or error(db_error($query));
@@ -3953,8 +3959,12 @@ function mod_pages($board = false) {
 	}
 
 	foreach ($pages as $i => &$p) {
-		$p['delete_token'] = make_secure_link_token('edit_pages/delete/' . $p['name'] . ($board ? ('/' . $board) : ''));
+		$p['delete_token'] = make_secure_link_token('edit_pages/delete/' . $p['name'] . ($board || $board==="0" ? ('/' . $board) : ''));
 	}
 
-	mod_page(_('Pages'), 'mod/pages.html', array('pages' => $pages, 'token' => make_secure_link_token('edit_pages' . ($board ? ('/' . $board) : '')), 'board' => $board));
+    	if(isset($mod['type']) && $mod['type']>=25){
+        	$board = "*";
+    	}
+	
+	mod_page(_('Pages'), 'mod/pages.html', array('pages' => $pages, 'token' => make_secure_link_token('edit_pages' . ($board || $board==="0" ? ('/' . $board) : '')), 'board' => $board));
 }

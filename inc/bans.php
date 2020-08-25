@@ -60,7 +60,7 @@ class Bans {
       (' . ($board !== false ? '(`board` IS NULL OR `board` = :board) AND' : '') . '
       (`iphash` = :ip ) OR (`iphash` = :iprange ))') . '
     ORDER BY `expires` IS NULL, `expires` DESC');
-    
+
     if ($board !== false){
       $query->bindValue(':board', $board, PDO::PARAM_STR);
     }
@@ -117,9 +117,9 @@ class Bans {
     $query = prepare("SELECT ``bans``.*, `username`, `type` FROM ``bans``
       LEFT JOIN ``mods`` ON ``mods``.`id` = `creator`
       LEFT JOIN ``boards`` ON ``boards``.`uri` = ``bans``.`board`
-       :queryaddition 
+       $queryaddition
        ORDER BY `created` DESC") ;
-    $query->bindValue(':queryaddition', $query_addition);
+    //$query->bindValue(':queryaddition', $query_addition);
     $query->execute() or error(db_error($query));
     $bans = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -170,7 +170,7 @@ class Bans {
 
   static public function seen($ban_id) {
     global $config;
-    $query = prepare("UPDATE ``bans`` SET `seen` = 1 WHERE `id` = :id"); 
+    $query = prepare("UPDATE ``bans`` SET `seen` = 1 WHERE `id` = :id");
     $query -> bindValue(':id', (int)$ban_id);
     $query->execute() or error(db_error($query));
     if (!$config['cron_bans']) {
@@ -192,10 +192,10 @@ class Bans {
     if ($boards && $boards[0] == '*') $boards = false;
 
     if ($modlog) {
-      $query = prepare("SELECT `iphash`, `board` FROM ``bans`` WHERE `id` = :uid"); 
+      $query = prepare("SELECT `iphash`, `board` FROM ``bans`` WHERE `id` = :uid");
       $query -> bindValue(':uid', (int)$ban_id);
       $query->execute() or error(db_error($query));
-      
+
       // Ban doesn't exist
       if (!$ban = $query->fetch(PDO::FETCH_ASSOC)) {
         return false;

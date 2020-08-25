@@ -110,7 +110,7 @@
 <fieldset class="mod-dash mod-dash-set mod-dash-boards">
         <legend>{% trans 'Boards' %}</legend>
         <ul>
-          {% for board in boards %}
+          {% for board in displayboards %}
           {% if board.uri in mod.boards and mod.boards[0] != '*' %}
 
               {{ config.board_abbreviation|sprintf(board.uri) }} - {{ board.title|e }} - {{ board.subtitle|e }}:

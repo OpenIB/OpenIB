@@ -325,6 +325,11 @@ FLAGS;
 		
 		// "File deleted"
 		if (isset($_FILES['deleted_file']) && !empty($_FILES['deleted_file']['tmp_name'])){
+
+      			if(!in_array($_FILES['deleted_file']['type'],array('image/png','image/gif'))){
+        			error($config['error']['invalidimgfiletype']);
+      			}
+
 			$upload = $_FILES['deleted_file']['tmp_name'];
 			$extension = strtolower(mb_substr($_FILES['deleted_file']['name'], mb_strrpos($_FILES['deleted_file']['name'], '.') + 1));
 
@@ -355,6 +360,11 @@ FLAGS;
 
 		// Spoiler file
 		if (isset($_FILES['spoiler_file']) && !empty($_FILES['spoiler_file']['tmp_name'])){
+			
+      			if(!in_array($_FILES['spoiler_file']['type'],array('image/png','image/gif'))){
+        			error($config['error']['invalidimgfiletype']);
+      			}
+
 			$upload = $_FILES['spoiler_file']['tmp_name'];
 			$extension = strtolower(mb_substr($_FILES['spoiler_file']['name'], mb_strrpos($_FILES['spoiler_file']['name'], '.') + 1));
 
@@ -386,6 +396,11 @@ FLAGS;
 
 		// No file
 		if (isset($_FILES['nofile_file']) && !empty($_FILES['nofile_file']['tmp_name'])){
+			
+      			if(!in_array($_FILES['nofile_file']['type'],array('image/png','image/gif'))){
+        			error($config['error']['invalidimgfiletype']);
+      			}
+
 			$upload = $_FILES['nofile_file']['tmp_name'];
 			$extension = strtolower(mb_substr($_FILES['nofile_file']['name'], mb_strrpos($_FILES['nofile_file']['name'], '.') + 1));
 

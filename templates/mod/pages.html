@@ -1,9 +1,9 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <div style="text-align:center">
 <p class="unimportant">
-{% if board %}
+{% if board is not empty and board != '*' %}
 {% set page_max = config.pages_max %}
-{% trans %}This page allows you to create static pages for your board. The limit is {{ page_max }} pages per board. You will still have to link to your pages somewhere in your board, for example in a sticky or in the board's announcement. To make links in the board's announcement, use &lt;a&gt; HTML tags.{% endtrans %}
+{% trans %}You can create static pages for your board here. The limit is {{ page_max }} pages per board. You will still have to link to your pages somewhere on your board. To link to the static pages you created on your board's announcement bar, use HTML &lt;a&gt; tags.{% endtrans %}
 {% else %}
 {% trans %}This page allows you to create static pages for your imageboard.{% endtrans %}
 {% endif %}
@@ -13,7 +13,7 @@
 <table style="margin:auto">
 <tr><th>{% trans %}URL{% endtrans %}</th><th>{% trans %}Title{% endtrans %}</th><th>{% trans %}Edit{% endtrans %}</th><th>{% trans %}Delete{% endtrans %}</tr>
 {% for page in pages %}
-<tr><td>{{ page.name }}</td><td>{{ page.title }}</td><td><a href="?/edit_page/{{ page.id }}">{% trans %}Edit{% endtrans %}</a></td><td><a href="?/edit_pages/delete/{{ page.name }}{% if board %}/{{ board }}{% endif %}/{{ page.delete_token }}">{% trans %}Delete{% endtrans %}</a></td>
+<tr><td>{{ page.name }}</td><td>{{ page.title }}</td><td><a href="?/edit_page/{{ page.id }}">{% trans %}Edit{% endtrans %}</a></td><td>{{ secure_link_confirm('Delete'|trans, 'Delete page'|trans, 'Are you sure you wish to delete this page?'|trans, 'edit_pages/delete/' ~ page.name ~ '/' ~ board) }}</td>
 {% endfor %}
 {% else %}
 <em>No pages yet!</em>
