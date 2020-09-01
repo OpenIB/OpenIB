@@ -1,7 +1,7 @@
 <table class="modlog">
 	<tr>
 		<th>{% trans 'Username' %}</th>
-		<th>{% trans 'IP address' %}</th>
+		<th>{% trans 'IP hash' %}</th>
 		<th>{% trans 'Time' %}</th>
 		<th>{% trans 'Board' %}</th>
 		<th>{% trans 'Action' %}</th>
@@ -27,7 +27,10 @@
 			</td>
 			<td class="minimal">
 				{% if mod|hasPermission(config.mod.show_ip_modlog) %}
-					<a href="?/IP/{{ log.ip }}">{{ log.ip }}</a>
+					<a href="?/IP/{{ log.ip }}">{{ log.ip|slice(52,61) }}</a>
+
+
+Add CommentCo }}</a>
 				{% else %}
 					<em>hidden</em>
 				{% endif %}
