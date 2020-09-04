@@ -153,6 +153,9 @@
 	$config['additional_javascript'][] = 'js/wpaint.js';
 	// Code tags (fix because we no longer have different scripts for each board)
 	$config['additional_javascript'][] = 'js/code_tags/run_prettify.js';
+
+	$config['additional_javascript'][] = 'js/webtoolkit.sha1.js';
+	$config['additional_javascript'][] = 'js/user_unique_identity.js';
         // Fileboard
         $config['additional_javascript'][] = 'js/fileboard.js';
 
