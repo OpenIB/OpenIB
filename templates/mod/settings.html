@@ -1,5 +1,5 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<p style="text-align: center" class="unimportant">{% trans %}Tip: Some changes made on this page won't take effect until a new post is made on your board.{% endtrans %}</p>
+
 <form action="{{ action }}" method="post">
 	<input type="hidden" name="token" value="{{ token }}">
 	<table>
@@ -25,47 +25,52 @@
 
 	<table>
 		<tr><th>{% trans %}Board type{% endtrans %}</th><td><select name="board_type" id="board_type">
-			<option value="imgboard" {% if not config.disable_images and not config.file_board %}selected{% endif %}>Image board</option>
-			<option value="txtboard" {% if config.disable_images %}selected{% endif %}>Text board</option>
-			<option value="fileboard" {% if config.file_board %}selected{% endif %}>File board</option>
-		</select></td></tr>
+      		<option value="imgboard" {% if not config.disable_images and not config.file_board %}selected{% endif %}>{% trans %}Image board{% endtrans %}</option>
+      		<option value="txtboard" {% if config.disable_images %}selected{% endif %}>{% trans %}Text board{% endtrans %}</option>
+      		<option value="fileboard" {% if config.file_board %}selected{% endif %}>{% trans %}File board{% endtrans %}</option>
+    		</select></td></tr>
 		<tr><th>{% trans %}Country flags{% endtrans %}</th><td><input type="checkbox" name="country_flags" {% if config.country_flags %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}/pol/-style user flags{% endtrans %}<br><span class="unimportant">Enabling this disables country flags<br>Make sure to actually upload some first on the flags page!</span></th><td><input type="checkbox" name="user_flags" {% if config.user_flag %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable custom board flags{% endtrans %}<br><span class="unimportant">First, click on <a href="?/flags/{{board.uri}}"><i>Edit board flags</i></a> to add your flags.<br>{% trans %}Note: if you enable this, you will disable country flags.{% endtrans %}</span></th><td><input type="checkbox" name="kc_user_flags" {% if config.kc_user_flags %}checked{% endif %}></td></tr>
 		<tr><th>{% trans %}Custom board assets{% endtrans %}<br><span class="unimportant">Enabling this uses your custom spoiler/deleted/no file images.<br>Make sure to actually upload some first on the assets page or they will 404!</span></th><td><input type="checkbox" name="custom_assets" {% if config.custom_assets %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Forced anonymous{% endtrans %}</th><td><input type="checkbox" name="field_disable_name" {% if config.field_disable_name %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Allow forced anonymous{% endtrans %}</th><td><input type="checkbox" name="force_anon_thread" {% if config.force_anon_thread %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}YouTube/Voocaroo embedding{% endtrans %}</th><td><input type="checkbox" name="enable_embedding" {% if config.enable_embedding %}checked{% endif %}></td></tr>
-		<tr class='imgboard'><th>{% trans %}Require image for OP{% endtrans %}</th><td><input type="checkbox" name="force_image_op" {% if config.force_image_op %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Require subject for OP{% endtrans %}</th><td><input type="checkbox" name="force_subject_op" {% if config.force_subject_op %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Require user/country flag for all posts{% endtrans %}</th><td><input type="checkbox" name="force_flag" {% if config.force_flag %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Poster ID's{% endtrans %}</th><td><input type="checkbox" name="poster_ids" {% if config.poster_ids %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Display SAGE! after saged posts{% endtrans %}</th><td><input type="checkbox" name="show_sages" {% if config.show_sages %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Automatically convert ... to …{% endtrans %}</th><td><input type="checkbox" name="auto_unicode" {% if config.auto_unicode %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Disallow combining characters ("Zalgo", Vietnamese text){% endtrans %}</th><td><input type="checkbox" name="strip_combining_chars" {% if config.strip_combining_chars %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}No index{% endtrans %}<br><span class="unimportant">{% trans %}Hide from boards index<br/>and do not index in search engines{% endtrans %}</span></th><td><input type="checkbox" name="meta_noindex" {% if not board.indexed %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Archive my board on 8archive.moe{% endtrans %}<br><span class="unimportant">{% trans %}This archives your board on 8archive.moe if you opt in (broken at the moment){% endtrans %}</span></th><td><input type="checkbox" name="8archive" {% if board['8archive'] %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}[code] tags{% endtrans %}</th><td><input type="checkbox" name="code_tags" {% if 'js/code_tags/run_prettify.js' in config.additional_javascript %}checked{% endif %}></td></tr>
-		<tr class='imgboard fileboard'><th>{% trans %}Oekaki{% endtrans %}</th><td><input type="checkbox" name="oekaki" {% if config.oekaki %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Format math between $${% endtrans %}</th><td><input type="checkbox" name="katex" {% if config.katex %}checked{% endif %}></td></tr>
-		<tr class='imgboard'><th>{% trans %}Allow SWF uploading{% endtrans %}</th><td><input type="checkbox" name="allow_flash" {% if 'swf' in config.allowed_ext_files %}checked{% endif %}></td></tr>
-		<tr class='imgboard'><th>{% trans %}Allow PDF uploading{% endtrans %}</th><td><input type="checkbox" name="allow_pdf" {% if 'pdf' in config.allowed_ext_files %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable forced anonymous boardwide<br><span class="unimportant">Every thread will be anonymized.<br>The <i>Name</i> and <i>Subject</i> fields will disappear and the <i>Email</i> field will be restricted to a dropdown menu.</span>{% endtrans %}</th><td><input type="checkbox" name="field_disable_name" {% if config.field_disable_name %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable custom board assets{% endtrans %}<br><span class="unimportant">{% trans %}Customize your board's Spoiler / File Deleted / No File assets.{% endtrans %}<br>Click on <a href="?/assets/{{board.uri}}"><i>Edit board assets</i></a> to add custom assets (or they will 404).</span></th><td><input type="checkbox" name="custom_assets" {% if config.custom_assets %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable forced anonymous per thread<br><span class="unimportant">Users are given the option to allow tripfags/namefags in the threads they create. Only replies will be anonymized.<br>The <i>Name</i> and <i>Subject</i> fields will disappear and the <i>Email</i> field will be restricted to a dropdown menu.</span>{% endtrans %}</th><td><input type="checkbox" name="force_anon_thread" {% if config.force_anon_thread %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Allow Board Volunteers to see post histories{% endtrans %}</th><td><input type="checkbox" name="allow_mod_to_see_subrange" {% if config.allow_mod_to_see_subrange %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Show capcodes and usernames automatically<br><span class="unimportant">The capcodes and usernames of logged-in users will appear automatically when they post through mod.php.<br>This applies to all account types.</span>{% endtrans %}</th><td><input type="checkbox" name="force_cap" {% if config.force_cap %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Disable thread creation for nonstaff users{% endtrans %}<br><span class="unimportant">{% trans %}Only the Board Owner, Board Volunteer(s) and/or Reporter(s) will be able to create threads (using mod.php).<br>Anyone will be able to reply to such threads.{% endtrans %}</span></th><td><input type="checkbox" name="caps_only" {% if config.caps_only %}checked{% endif %}> <span class="unimportant"></span></td></tr>
+		<tr><th>{% trans %}Allow embedding{% endtrans %}<br><span class="unimportant">{% trans %}Users will be able to embed content from the following websites{% endtrans %}: youtube.com, xhamster.com, thegoldwater.com,<br>
+redtube.com, pornhub.com, vimeo.com, tube8.com, xvideos.com, youjizz.com, twitch.tv, dailymotion.com,<br>
+vaughnlive.tv, liveleak.com, nicovideo.jp, streamable.com, soundcloud.com, xaniatube.com, vlive.tv, vocaroo.com,<br> hooktube.com, and smashcast.tv.</span></th><td><input type="checkbox" name="enable_embedding" {% if config.enable_embedding %}checked{% endif %}></td></tr>
+		<tr class='imgboard'><th>{% trans %}Force OPs to post images when creating threads{% endtrans %}</th><td><input type="checkbox" name="force_image_op" {% if config.force_image_op %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Force OPs to fill out the <i>Subject</i> field when creating threads{% endtrans %}</th><td><input type="checkbox" name="force_subject_op" {% if config.force_subject_op %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Force users to add custom/country flags to their posts{% endtrans %}</th><td><input type="checkbox" name="force_flag" {% if config.force_flag %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable user IDs (randomized per thread){% endtrans %}</th><td><input type="checkbox" name="poster_ids" {% if config.poster_ids %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Display SAGE! on posts with <i>sage</i> in the <i>Email</i> field{% endtrans %}</th><td><input type="checkbox" name="show_sages" {% if config.show_sages %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Convert ... (normal ellipsis) to … (Unicode horizontal ellipsis) automatically{% endtrans %}</th><td><input type="checkbox" name="auto_unicode" {% if config.auto_unicode %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Disallow combining characters (Zalgo text, Vietnamese text etc.){% endtrans %}</th><td><input type="checkbox" name="strip_combining_chars" {% if config.strip_combining_chars %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Unindex my board{% endtrans %}<br><span class="unimportant">{% trans %}Your board will disappear from boards.html, the <i>Trending boards</i> and <i>Top boards</i> bars, and the Nerve Center.<br>Please note: if you fail to sign in within two weeks, your board will still show up on the list of claimable boards.{% endtrans %}</span></th><td><input type="checkbox" name="meta_noindex" {% if not board.indexed %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Allow [code] tags{% endtrans %}</th><td><input type="checkbox" name="code_tags" {% if 'js/code_tags/run_prettify.js' in config.additional_javascript %}checked{% endif %}></td></tr>
+		<tr class='imgboard fileboard'><th>{% trans %}Show the oekaki applet in the post form{% endtrans %}</th><td><input type="checkbox" name="oekaki" {% if config.oekaki %}checked{% endif %}></td></tr>
+		<tr class='imgboard'><th>{% trans %}Allow SWF uploads{% endtrans %}</th><td><input type="checkbox" name="allow_flash" {% if 'swf' in config.allowed_ext_files %}checked{% endif %}></td></tr>
+		<tr class='imgboard'><th>{% trans %}Allow PDF uploads{% endtrans %}</th><td><input type="checkbox" name="allow_pdf" {% if 'pdf' in config.allowed_ext_files %}checked{% endif %}></td></tr>
 		<tr><th>{% trans %}Enable dice rolling{% endtrans %}</th><td><input type="checkbox" name="allow_roll" {% if config.allow_roll %}checked{% endif %}></td></tr>
-		<tr><th><a href="http://blog.xkcd.com/2008/01/14/robot9000-and-xkcd-signal-attacking-noise-in-chat/">{% trans %}ROBOT9000{% endtrans %}</a></th><td><input type="checkbox" name="robot_enable" {% if config.robot_enable %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Don't allow users to repost images (whole board){% endtrans %}</th><td><input type="checkbox" name="image_reject_repost" {% if config.image_reject_repost %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Don't allow users to repost images (same thread){% endtrans %}</th><td><input type="checkbox" name="image_reject_repost_in_thread" {% if config.image_reject_repost_in_thread %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Allow a poster to delete his own posts{% endtrans %}</th><td><input type="checkbox" name="allow_delete" {% if config.allow_delete %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Allow posters to see when a thread is bumplocked{% endtrans %}</th><td><input type="checkbox" name="view_bumplock" {% if config.mod.view_bumplock == -1 %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Allow posters to post via the Tor onion router{% endtrans %}</th><td><input type="checkbox" name="tor_posting" {% if config.tor_posting %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable the <a href="https://blog.xkcd.com/2008/01/14/robot9000-and-xkcd-signal-attacking-noise-in-chat/">ROBOT9000</a> moderation script{% endtrans %}<br><span class="unimportant">{% trans %}Users who post unoriginal content will be muted automatically.{% endtrans %}</span></th><td><input type="checkbox" name="robot_enable" {% if config.robot_enable %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Don't allow users to repost images on your board<br><span class="unimportant">This will apply to every thread on your board.</span>{% endtrans %}</th><td><input type="checkbox" name="image_reject_repost" {% if config.image_reject_repost %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Don't allow users to repost images in the same thread<br><span class="unimportant">This will apply to individual threads only.</span>{% endtrans %}</th><td><input type="checkbox" name="image_reject_repost_in_thread" {% if config.image_reject_repost_in_thread %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Allow users to delete their own posts{% endtrans %}</th><td><input type="checkbox" name="allow_delete" {% if config.allow_delete %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Allow users to see when a thread is bumplocked<br><span class="unimportant">A small anchor icon will be added to bumplocked threads.</span>{% endtrans %}</th><td><input type="checkbox" name="view_bumplock" {% if config.mod.view_bumplock == -1 %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Allow Torposting<br><span class="unimportant">Users will be able to post through the <a href="http://oxwugzccvk3dk6tj.onion/">8chan .onion address</a>.<br>By default, the Tor user ID is <i>ID:000000</i>.</span>{% endtrans %}</th><td><input type="checkbox" name="tor_posting" {% if config.tor_posting %}checked{% endif %}></td></tr>
 		<tr><th>{% trans %}Allow posters to post upload files via Tor (trial){% endtrans %}</th><td><input type="checkbox" name="tor_image_posting" {% if config.tor_image_posting %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Enable CAPTCHA{% endtrans %}<br/><span class="unimportant">Users must solve a CAPTCHA in order to post.<br> This is not ReCAPTCHA, it is custom to 8chan.</span></th><td><input type="checkbox" name="captcha" {% if config.captcha.enabled %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Enable CAPTCHA for thread creation only{% endtrans %}<br/><span class="unimportant">Users must solve a CAPTCHA in order to create new threads,<br>but do not have to solve a CAPTCHA in order to post replies.</span></th><td><input type="checkbox" name="new_thread_capt" {% if config.new_thread_capt %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Public bans{% endtrans %}<br><span class="unimportant">{% trans %}Displays your bans for the public{% endtrans %}</span></th><td><input type="checkbox" name="public_bans" {% if board.public_bans %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Public action log{% endtrans %}<br><span class="unimportant">{% trans %}Displays all actions to the public{% endtrans %}</span></th><td><select name="public_logs"><option value="0" {% if board.public_logs == 0 %}selected{% endif %}>None</option><option value="1" {% if board.public_logs == 1 %}selected{% endif %}>Full log of all actions</option><option value="2" {% if board.public_logs == 2 %}selected{% endif %}>Full log of all actions, no usernames</option></td></tr>
-		<tr><th>{% trans %}Max number of newlines per post{% endtrans %}</th><td><select name="max_newlines"><option value="0" {% if config.max_newlines == 0 %}selected{% endif %}>unlimited</option>{% for i in range(20, 300) %}<option value="{{ i }}" {% if config.max_newlines == i %}selected{% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
+		<tr><th>{% trans %}Enable CAPTCHA per post<br><span class="unimportant">Users will be required to solve an 8chan-specific CAPTCHA in order to post.</span>{% endtrans %}</th><td><input type="checkbox" name="captcha" {% if config.captcha.enabled %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Enable CAPTCHA only for thread creation{% endtrans %}<br/><span class="unimportant">{% trans %}Users will be required to solve an 8chan-specific CAPTCHA to create new threads.<br>Users may post replies without having to solve a CAPTCHA.{% endtrans %}</span></th><td><input type="checkbox" name="new_thread_capt" {% if config.new_thread_capt %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Make your board's bans public{% endtrans %}<br><span class="unimportant">{% trans %}Any bans by the Board Owner / Board Volunteer(s) will show up on the <a href="https://8ch.net/bans.html">public ban list</a>.{% endtrans %}</span></th><td><input type="checkbox" name="public_bans" {% if board.public_bans %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Make your board's action log public{% endtrans %}<br><span class="unimportant">{% trans %}Users will be able to see the actions of the Board Owner / Board Volunteer(s) on a public list.<br>Choose <i>None</i> to hide the board log from public view.{% endtrans %}</span></th><td><select name="public_logs"><option value="0" {% if board.public_logs == 0 %}selected{% endif %}>None</option><option value="1" {% if board.public_logs == 1 %}selected{% endif %}>Full log of all actions</option><option value="2" {% if board.public_logs == 2 %}selected{% endif %}>Full log of all actions, no usernames</option></td></tr>
+		<tr><th>{% trans %}Maximum number of newlines per post{% endtrans %}</th><td><select name="max_newlines"><option value="0" {% if config.max_newlines == 0 %}selected{% endif %}>Unlimited</option>{% for i in range(20, 300) %}<option value="{{ i }}" {% if config.max_newlines == i %}selected{% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
 		<tr><th>{% trans %}Page count{% endtrans %}</th><td><select name="max_pages">{% for i in range(1, 25) %}<option value="{{ i }}" {% if config.max_pages == i %}selected{% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
 		<tr><th>{% trans %}Bump limit{% endtrans %}</th><td><select name="reply_limit">{% for i in range(250, 750, 25) %}<option value="{{ i }}" {% if config.reply_limit == i %}selected{% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
-		<tr><th>{% trans %}Minimum OP text length{% endtrans %} <span class="unimportant">(integer between 0 and 1024)</span></th><td><input type="text" name="min_body" size="4" value={{ config.min_body }}></td></tr>
-		<tr><th>{% trans %}Language{% endtrans %}<br/><span class="unimportant">{% trans %}Read this page for more information about contributing translations:<br><a href="/translation.html">Translation tutorial</a> or use <a href="https://www.transifex.com/projects/p/infinity/">Transifex</a>{% endtrans %}</span></th><td>
+		<tr><th>{% trans %}Bumplock after...{% endtrans %}<br/><span class="unimportant">Counted in hours, this allows you to decide when a thread will be automatically bumplocked.<br>For instance, if set to <i>1</i>, threads will be automatically bumplocked one hour after being created.<br>Use integers only (<i>0</i> for never).</span></th><td><input type="text" name="bumplock_after" pattern="\d+" size="4" value={{ board.bumplock_after }}></td></tr>
+		<tr><th>{% trans %}Minimum number of characters for thread creation<br><span class="unimportant">Pick an integer between 0 and 1024.</span>{% endtrans %}</th><td><input type="text" name="min_body" size="4" value={{ config.min_body }}></td></tr>
+		<tr><th>{% trans %}Language{% endtrans %}<br/><span class="unimportant">{% trans %}To contribute, please refer to the <a href="https://8ch.net/translation.html">8chan Translation Tutorial</a> or use OpenIB's <a href="https://www.transifex.com/8chan/openib/">Transifex page</a>.{% endtrans %}</span></th><td>
 		<select name="locale">
 			<option value="en" {% if "en" == config.locale %}selected{% endif %}>en</option>
 			{% for language in languages %}
@@ -79,32 +84,31 @@
 				<label><input type='checkbox' name='allowed_type[]' value='{{ type }}' {% if type in config.allowed_ext_files %}checked{% endif %}>{{ type }}</label>  
 			{% endfor %}
 		</td></tr>
-		<tr class='fileboard'><th>{% trans %}Disable OP image upload{% endtrans %}</th><td><input type="checkbox" name="allowed_ext_op" {% if config.allowed_ext_op %}checked{% endif %}>
-			<label> (<input type="checkbox" name="allowed_ext_op_video" {% if config.allowed_ext_op and 'webm' in config.allowed_ext_op %}checked{% endif %}> also allow video upload)</label></td></tr>
+		
 		<tr class='fileboard'><th>{% trans %}Keep original filename{% endtrans %}</th><td><input type="checkbox" name="anal_filenames" {% if config.filename_func == 'filename_func' %}checked{% endif %}></td></tr>
 		</tr>
-		<tr><th>{% trans %}Max images per post{% endtrans %}</th><td><select name="max_images">{% for i in 1..5 %}<option value="{{ i }}" {% if config.max_images == i %} selected {% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
+		<tr><th>{% trans %}Maximum number of images per post{% endtrans %}</th><td><select name="max_images">{% for i in 1..5 %}<option value="{{ i }}" {% if config.max_images == i %} selected {% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
 		<tr><th>{% trans %}Enable twemojis{% endtrans %}</th><td><input type="checkbox" name="enable_emoji" {% if config.enable_emoji %}checked{% endif %}></td></tr>
+		<tr><th>{% trans %}Tripcode whitelist{% endtrans %}<br><span class="unimportant">{% trans %}Use different lines for new entries. Leave it blank to allow all tripcodes.{% endtrans %}</span><br><span class="unimportant">{% trans %}If you don't want tripfags on your board, please refer to the <i>Forced anonymous</i> settings.{% endtrans %}</span></th><td><textarea name="tripcode_whitelist" style="height:100px;width:220px">{{tripcode_whitelist}}</textarea></td></tr>
+	
+		<tr><th colspan="2"><strong>{% trans %}Antispam settings{% endtrans %}</strong></th></tr>
+    <tr><th>{% trans %}Early 404{% endtrans %}<br><span class="unimportant">With this enabled, threads with less than 10 replies will 404 at page 5 instead of at page 15.<br>In effect, this makes it so that raiders have to put 10 replies in all their threads to slide an entire board.</span></th><td><input type="checkbox" name="early_404" {% if config.early_404 %}checked{% endif %}></td></tr>
+    <tr><th>{% trans %}Maximum number of threads per hour boardwide{% endtrans %}<br><span class="unimportant">{% trans %}Set the maximum number of threads that can be created per hour on your board, regardless of poster.<br>If a thread is deleted, it doesn't count.{% endtrans %}</span></th><td><select name="hour_max_threads"><option value="none">none</option>{% for i in 1..100 %}<option value="{{ i }}" {% if config.hour_max_threads == i %} selected {% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
 	</table>
 
-	<table>
-		<tr><th colspan="2"><strong>{% trans %}Spam settings{% endtrans %}</strong></th></tr>
-		<tr><th>{% trans %}Early 404{% endtrans %}<br><span class="unimportant">With this enabled, threads with less than 10 replies will 404 at page 5 instead of at page 15.<br>In effect, this makes it so that raiders have to put 10 replies in all their threads to slide an entire board.</span></th><td><input type="checkbox" name="early_404" {% if config.early_404 %}checked{% endif %}></td></tr>
-		<tr><th>{% trans %}Max threads per hour board-wide{% endtrans %}<br><span class="unimportant">Only allow X threads to be made per hour, regardless of poster<br>If a thread is deleted, it's not counted</span></th><td><select name="hour_max_threads"><option value="none">none</option>{% for i in 1..100 %}<option value="{{ i }}" {% if config.hour_max_threads == i %} selected {% endif %}>{{ i }}</option>{% endfor %}</select></td></tr>
-	</table>
 
-
-	<p style="text-align:center"><a href="?/banners/{{board.uri}}">{% trans %}Edit board banners{% endtrans %}</a></p>
-	<p style="text-align:center"><a href="?/assets/{{board.uri}}">{% trans %}Edit board assets{% endtrans %}</a></p>
-	<p style="text-align:center"><a href="?/flags/{{board.uri}}">{% trans %}Edit board flags{% endtrans %}</a></p>
-	<p style="text-align:center"><a href="?/volunteers/{{board.uri}}">{% trans %}Edit board volunteers{% endtrans %}</a></p>
-	<p style="text-align:center"><a href="?/tags/{{board.uri}}">{% trans %}Edit board tags{% endtrans %}</a></p>
-	<p style="text-align:center"><a href="?/edit_pages/{{board.uri}}">{% trans %}Edit board pages{% endtrans %}</a></p>
+	  <p style="text-align:center">
+	    <input type="button" onclick="location.href='?/assets/{{board.uri}}';" value="{% trans %}Edit board assets{% endtrans %}" />
+	    <input type="button" onclick="location.href='?/flags/{{board.uri}}';" value="{% trans %}Edit board flags{% endtrans %}" />
+	    <input type="button" onclick="location.href='?/volunteers/{{board.uri}}';" value="{% trans %}Edit board volunteers{% endtrans %}" />
+	    <input type="button" onclick="location.href='?/tags/{{board.uri}}';" value="{% trans %}Edit board tags{% endtrans %}" />
+	    <input type="button" onclick="location.href='?/edit_pages/{{board.uri}}';" value="{% trans %}Edit board pages{% endtrans %}" />
+	  </p>
 
 	<table>
 		<tr><th>{% trans %}Default poster name{% endtrans %}</th><td><input type="text" name="anonymous" value="{{config.anonymous|e}}"></td></tr>
-		<tr><th>{% trans %}Board announcement{% endtrans %}</th><td><input type="text" name="blotter" value="{{config.blotter|e}}" size="75"></td></tr>
-		<tr><th>{% trans %}Stylesheet{% endtrans %}<br/><span class="unimportant">{% trans %}note: does not validate CSS{% endtrans %}</span><br/><span class="unimportant">{% trans %}Allowed URLs:{% endtrans %}<br/>{{ allowed_urls|join('<br>') }}</span></th><td><textarea name="css" style="height:100px;width:500px">{{css}}</textarea></td><tr>
+		<tr><th>{% trans %}Board announcement bar{% endtrans %}<br><span class="unimportant">{% trans %}You can use HTML too.{% endtrans %}</span></th><td><input type="text" name="blotter" value="{{config.blotter|e}}" size="75"> [<a id="preview-announcement" target="_blank"href="?/preview/{{board.uri}}">{% trans %}Preview{% endtrans %}</a>]</td></tr>
+		<tr><th>{% trans %}Stylesheet{% endtrans %}<br/><span class="unimportant">{% trans %}Note: it does not validate CSS.{% endtrans %}</span><br/><span class="unimportant">{% trans %}Allowed URLs:{% endtrans %}<br/>{{ allowed_urls|join('<br>') }}</span></th><td><textarea name="css" style="height:100px;width:590px">{{css}}</textarea></td><tr>
 	</table>
 
 	<table id="wf">
@@ -145,6 +149,8 @@
 			<li><input name="delete" onclick="return confirm({% trans 'Are you sure you want to permanently delete this board?' %});" type="submit" value="{% trans 'Delete board' %}"></li>
 		{% endif %} #}
 	</ul>
+
+	<p style="text-align: center" class="unimportant">{% trans %}Please note: some changes will only take effect once a new post/thread is created.{% endtrans %}</p>
 </form>
 
 <script>
