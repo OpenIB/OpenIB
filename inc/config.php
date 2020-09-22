@@ -1148,6 +1148,9 @@
 	$config['error']['invalid_embed']	= _('Couldn\'t make sense of the URL of the video you tried to embed.');
 	$config['error']['captcha']		= _('You seem to have mistyped the verification.');
 	$config['error']['images_disabled'] = _('Uploading files is disabled on this board.');
+	$config['error']['passwordrequired'] = _('Your post cannot have an empty <i>Password</i> field.');
+	$config['error']['cantemptypassword'] = _('You cannot delete a post when the <i>Password</i> field is empty.');
+  	$config['error']['invalidpasswordtryrefresh'] = _('Wrong password. Your password might have changed since you made that post. Try refreshing the page.');
 
 	// mod.php errors
 	$config['error']['toomanyunban']	= _('You are only allowed to unban %s users at a time. You tried to unban %u users.');
