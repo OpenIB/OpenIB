@@ -2,7 +2,7 @@
 	<h2 style="margin:20px 0">{{ message }}</h2>
 	{% if board %}
 		<p>
-			<a href="{{ config.root }}{% if mod %}{{ config.file_mod }}?/{% endif %}{{ board.dir }}{{ config.file_index }}">
+			<a href="{% if mod==false %}https://8ch.net{% endif %}{{ config.root }}{% if mod %}{{ config.file_mod }}?/{% endif %}{{ board.dir }}{{ config.file_index }}">
 				{% trans 'Go back' %}
 			</a>
 		</p>
