@@ -21,6 +21,8 @@ if ($('#delete-fields #password').length) {
 		var threadId = $ele.parent().attr('id').replace('thread_', '');
 		var postId = $ele.find('.post_no').not('[id]').text();
 
+		var pass = $("input[name=password][type=text]").val();
+		
 		$buf.find('#delete_post_menu,#delete_file_menu').click(function(e) {
 			e.preventDefault();
 			$('#delete_'+postId).prop('checked', 'checked');
@@ -30,6 +32,7 @@ if ($('#delete-fields #password').length) {
 			} else {
 				$('#delete_file').prop('checked', '');
 			}
+			$("#password").val(pass);
 			$('input[name=delete][type=submit]').click();
 		});
 	});
