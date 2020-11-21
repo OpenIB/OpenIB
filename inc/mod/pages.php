@@ -963,7 +963,7 @@ function mod_page_ip_less($b, $id) {
 	}
 	
 	if (hasPermission($config['mod']['modlog_ip'])) {
-		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE `text` LIKE :search ORDER BY `time` DESC LIMIT 50");
+		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE MATCH ( text ) AGAINST ( :search ) and board = :board ORDER BY `time` DESC LIMIT 50");
 		$query->bindValue(':search', '%' . $ip . '%');
 		$query->execute() or error(db_error($query));
 		$args['logs'] = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -2459,18 +2459,7 @@ function mod_users() {
 	if (!hasPermission($config['mod']['manageusers']))
 		error($config['error']['noaccess']);
 	
-	$query = query("SELECT ``m``.`id`, ``m``.`username`, ``m``.`boards`, ``m``.`type`, ``m``.`email`, 
-	``ml``.`time` last, ``ml``.`text` action
-	FROM ``mods`` AS m
-	LEFT JOIN (
-	    SELECT ml1.* 
-	    FROM ``modlogs`` AS ml1 
-	    JOIN (
-	        SELECT `mod`, MAX(time) AS time
-	        FROM ``modlogs``
-	        GROUP BY `mod`   
-	    ) AS ml2 USING (`mod`, time)
-	) AS ml ON m.id = ml.`mod` GROUP BY ``m``.`id` ORDER BY ``m``.`type` DESC;") or error(db_error());
+	$query = prepare("with s as ( select `mod`, max(time) as time from modlogs group by `mod` ) select m.id, m.username, m.boards, m.type, m.email, s.time as last, ml.text as action  from mods as m left join s on ( m.id = s.`mod` ) left join modlogs as ml on ( m.id = ml.`mod` and s.time = ml.time ) group by m.id order by m.type desc;") or error(db_error());
 	$users = $query->fetchAll(PDO::FETCH_ASSOC);
 	
 	foreach ($users as &$user) {
