@@ -1069,6 +1069,11 @@ elseif (isset($_POST['post'])) {
 	if (!$post['mod']) header('X-Associated-Content: "' . $redirect . '"');
 
 	if (!isset($_POST['json_response'])) {
+		
+                if(isset($post['mod']) && !$post['mod']){
+                        $redirect = $config['webdomain'] . $redirect;
+                }		
+		
 		header('Location: ' . $redirect, true, $config['redirect_http']);
 	} else {
 		header('Content-Type: text/json; charset=utf-8');
