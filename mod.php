@@ -38,8 +38,8 @@ $pages = array(
 
 	'/edit_pages(?:/?(\%b)?)'		=> 'secure_POST pages',
 	'/edit_page/(\d+)'			=> 'secure_POST edit_page',
-	'/edit_pages/delete/([a-z0-9]+)'	=> 'secure delete_page',
-	'/edit_pages/delete/([a-z0-9]+)/(\%b)'	=> 'secure delete_page_board',
+	'/edit_pages/delete/([a-z1-9]+)'  	=> 'secure delete_page',
+	'/edit_pages/delete/([a-z1-9]+)/(\%b)'  => 'secure delete_page_board',
 	
 	'/noticeboard'				=> 'secure_POST noticeboard',	// view noticeboard
 	'/noticeboard/(\d+)'			=> 'secure_POST noticeboard',	// view noticeboard
