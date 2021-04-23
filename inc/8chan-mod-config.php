@@ -33,7 +33,7 @@
 	$config['mod']['postinlocked'] = BOARDVOLUNTEER;
 	$config['mod']['bumplock'] = BOARDVOLUNTEER;
 	$config['mod']['view_bumplock'] = BOARDVOLUNTEER;
-	$config['mod']['bypass_field_disable'] = BOARDVOLUNTEER;
+	$config['mod']['bypass_field_disable'] = JANITOR;
 	$config['mod']['view_banlist'] = BOARDVOLUNTEER;
 	$config['mod']['view_banstaff'] = BOARDVOLUNTEER;
 	$config['mod']['public_ban'] = BOARDVOLUNTEER;
